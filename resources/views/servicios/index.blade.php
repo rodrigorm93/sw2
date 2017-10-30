@@ -51,7 +51,7 @@
 	<h2 class="w3-center">Manual Slideshow</h2>
 
 	<div class="w3-content w3-display-container">
-	  <img class="mySlides" src="uploads/7JNaYs6oZhXRhs6BfyqcvRYeDQlKLc-banner.jpg" style="width:100%; height: 520px">
+	  <img class="mySlides" src="images/banner.jpg" style="width:100%; height: 520px">
 	  <img class="mySlides" src="http://cdn01.ib.infobae.com/adjuntos/162/imagenes/014/014/0014014674.jpg" style="width:100%; height: 520px">
 
 	  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
