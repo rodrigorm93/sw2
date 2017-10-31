@@ -13,6 +13,7 @@
 
 //Route::get('usuarios.tarjeta.create','UserController@tarjeta_create');
 //Route::post('usuarios.tarjeta.store','UserController@tarjeta_store');
+//Route::post('/servicios/ver_anuncio','ServiciosController@ver_anuncio');
 
 Route::resource('/','HomeController');
 Route::resource('/servicios','ServiciosController');

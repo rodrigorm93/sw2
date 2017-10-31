@@ -63,14 +63,41 @@
                                         </select>
                                 </p>
 
+
+
                                 <h4 class="widgettitle">Ubicación del servicio</h4>
+
                                 <p>
                                     <label>Región</label>
-                                    <span class="field"><input type="text" name="region" id="region" class="input-xxlarge" required="" /></span>
+                                    <span class="field">
+                                    <select name="region" id="region" class="uniformselect" required="">
+                                    @foreach($regiones as $region)
+                                    <option>{{$region -> REGION_NOMBRE}}</option>
+                                    @endforeach
+                                    </select>
+                                    </span>
                                 </p>
+                                
+                                <p>
+                                    <label>Provincia</label>
+                                    <span class="field">
+                                    <select name="region" id="region" class="uniformselect" required="">
+                                    @foreach($provincias as $provincia)
+                                    <option>{{$provincia -> PROVINCIA_NOMBRE}}</option>
+                                    @endforeach
+                                    </select>
+                                    </span>
+                                </p>
+
                                 <p>
                                     <label>Comuna</label>
-                                    <span class="field"><input type="text" name="comuna" id="comuna" class="input-xxlarge" required="" /></span>
+                                    <span class="field">
+                                    <select name="region" id="region" class="uniformselect" required="">
+                                    @foreach($comunas as $comuna)
+                                    <option>{{$comuna -> COMUNA_NOMBRE}}</option>
+                                    @endforeach
+                                    </select>
+                                    </span>
                                 </p>
                                 
                         </div><!--#wiz1step1-->

@@ -62,7 +62,14 @@ class ServiciosController extends Controller
     }
 
     public function create(){
-       return view('servicios.create');
+
+         $regiones=DB::table('region')->get();
+
+         $provincias = DB::table('provincia')->get();
+
+         $comunas = DB::table('comuna')->get();
+
+        return view('servicios.create',['regiones'=> $regiones,'provincias'=> $provincias, 'comunas'=> $comunas]);
     }
 
     public function store(Request $request){ 
@@ -206,26 +213,34 @@ class ServiciosController extends Controller
 
         if($tipoPago=='efectivo'){
             //GENERA UN PDF PARA LOS VEHICULOS
-      $numero_aleatorio = rand(10456780,16456780); //generamos el numero del comprobante
-       $fechaActual = date('d-m-Y'); //obtenemos la fecha
-       //Incrementando 20 dias
-      $mod_date = strtotime($fechaActual."+ 20 days");
-      $fechaVencimiento=date("d-m-Y",$mod_date);
+              $numero_aleatorio = rand(10456780,16456780); //generamos el numero del comprobante
+               $fechaActual = date('d-m-Y'); //obtenemos la fecha
+               //Incrementando 20 dias
+              $mod_date = strtotime($fechaActual."+ 20 days");
+              $fechaVencimiento=date("d-m-Y",$mod_date);
 
-  
+          
 
-        $anuncio=DB::table('anuncio as a')
-        ->where('a.titulo','=',$tituloAnuncio)     
-         ->get();
+                $anuncio=DB::table('anuncio as a')
+                ->where('a.titulo','=',$tituloAnuncio)     
+                 ->get();
 
 
 
-       $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
-       return $pdf->download('factura.pdf');
-}
+               $pdf = PDF::loadView('servicios.pdf', ["anuncio" => $anuncio,"total" => $totalPagar,"comprobante" => $numero_aleatorio,"fecha" => $fechaActual,"fechaV" => $fechaVencimiento,"duracion" => $duracion]);
+               return $pdf->download('factura.pdf');
+        }
 
         return Redirect::to('/');
 
+    }
+
+    public function show($id_anuncio)
+    {
+        $servicio = DB::table('anuncio')->where('id_anuncio', $id_anuncio)->first();
+        $imagenes = DB::table('fotos')->where('id_anuncio', $id_anuncio)->get();
+
+        return view("servicios.ver_anuncio", ['servicio' => $servicio, 'imagenes' => $imagenes]);
     }
 
   }
