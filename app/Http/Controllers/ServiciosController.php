@@ -41,12 +41,18 @@ class ServiciosController extends Controller
         $servicios = DB::table('anuncio as a')
         ->join ('orden as o', 'a.id_anuncio', '=' , 'o.id_anuncio')
         ->join ('users as u', 'o.id_cliente', '=' , 'u.id')
+        ->join ('fotos as f', 'a.id_anuncio', '=' , 'f.id_anuncio')
+        ->where('f.id_foto', '=', '0')
         ->select('a.id_anuncio as id_anuncio',
                 'a.titulo as titulo',
                 'a.descripcion as descripcion',
                 'a.precio_serv as precio_serv',
+                'a.tipo_servicio as tipo_servicio',
+                'a.region as region',
+                'a.comuna as comuna',
                 'u.nombre as nombre',
-                'u.apellido as apellido'
+                'u.apellido as apellido',
+                'f.foto as foto'
                 )
         ->paginate(5);
 
@@ -86,6 +92,9 @@ class ServiciosController extends Controller
             $anuncio->descripcion = $request->get('descripcion');
             $anuncio->condicion = 0;
             $anuncio->precio_serv = $request->get('precio_serv');
+            $anuncio->region = $request->get('region');
+            $anuncio->comuna = $request->get('comuna');
+            $anuncio->tipo_servicio = $request->get('tipo');
 
             //Ingresa los datos de la persona o el vehiculo
             if($tipoServicio == 'mecanico' || $tipoServicio == 'otros_per'){
@@ -150,7 +159,7 @@ class ServiciosController extends Controller
               ->update(['anuncios_pend' => $lastValue->anuncios_pend+1]);
 
 
-
+            //AQUI SE GUARDAN LAS FOTOS
             //Se crean los array de los siguientes datos:
             $file = Input::file('imagen');
 
@@ -160,7 +169,7 @@ class ServiciosController extends Controller
             while($cont < count($file)){
 
                 //se le asigna un nombre aleatorio a la imagen
-                $random = str_random(30);
+                /*$random = str_random(30);
                 $nombre = $random.'-'.$file[$cont]->getClientOriginalName();
                 $path = public_path( 'uploads/'.$nombre );
                 $url = '/uploads/'.$nombre;
@@ -170,12 +179,18 @@ class ServiciosController extends Controller
                     $constraint->aspectRatio();
                 });
                 //guarda la imagen en el directorio public/uploads
-                $image->save($path);
+                $image->save($path);*/
+
+               // $image = Image::make( $file[$cont] -> getRealPath() );
+                //$image = (string) Image::make( $file[$cont] -> getRealPath() )->encode('data-url');
+                $temp = file_get_contents($file[$cont] );
+                $image = base64_encode($temp);
+
 
                 $imagen = new Imagenes;
                 $imagen->id_foto = $cont;
                 $imagen->id_anuncio = $anuncio->id_anuncio;
-                $imagen->foto = $url;
+                $imagen->foto = $image;
                 $imagen->save();   
 
                 $cont = $cont+1;

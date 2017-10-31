@@ -48,12 +48,12 @@
                                 <p> Escoja el título que tendrá su anuncio</p>
                                 <p>
                                     <label>Título</label>
-                                    <span class="field"><input type="text" name="titulo" id="titulo" class="input-xxlarge" /></span>
+                                    <span class="field"><input type="text" name="titulo" id="titulo" class="input-xxlarge" required="" /></span>
                                 </p>
 
                                 <p>
                                     <label>Tipo servicio</label>
-                                        <select name="tipo" id="tipo" class="uniformselect" onchange="cambio_tipo()">
+                                        <select name="tipo" id="tipo" class="uniformselect" onchange="cambio_tipo()" required="">
                                           <option value="humano" disabled style="background-color: pink" >Servicio personas</option>
                                             <option value="mecanico" >Mecánico</option>
                                             <option value="otros_per" >Otros servicios</option>
@@ -61,6 +61,16 @@
                                             <option value="transporte" >Transportes/Mudanzas</option>
                                             <option value="arriendo" >Arriendo</option>
                                         </select>
+                                </p>
+
+                                <h4 class="widgettitle">Ubicación del servicio</h4>
+                                <p>
+                                    <label>Región</label>
+                                    <span class="field"><input type="text" name="region" id="region" class="input-xxlarge" required="" /></span>
+                                </p>
+                                <p>
+                                    <label>Comuna</label>
+                                    <span class="field"><input type="text" name="comuna" id="comuna" class="input-xxlarge" required="" /></span>
                                 </p>
                                 
                         </div><!--#wiz1step1-->
@@ -111,11 +121,6 @@
 
                                 <div id="imagenes"></div>
                                
-
-
-                                <p>
-                                    <span class="field">  <button class="btn btn-primary" type="submit">submit</span>
-                                </p>
 
                             </div>
                                                                                                

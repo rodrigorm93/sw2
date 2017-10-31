@@ -6,12 +6,13 @@
 
 	<!-- pull-right:posiciona el elemento a la derecha de la pantalla -->
 	@foreach ($servicios as $servicio)
+
 	
 		<hr>
 		<div class="row" >
 			<div class="4u" style="vertical-align: middle;" >
 				<section>
-					<a href="#" class=""><img src="images/pic03.jpg" alt="" height="200" width="200" ></a>
+					<a href="#" class=""><img src="data:image/png;base64, {{$servicio -> foto}}" alt="" height="200" width="200" ></a>
 				</section>
 			</div>
 			<div class="8u">
@@ -22,13 +23,11 @@
 			<div class="4u">
 				<section>
 					<div style="border-bottom: 1px solid silver;"></div>
-					Autor: {{$servicio -> nombre}} Mendez <br>
+					Autor: {{$servicio -> nombre}} {{$servicio -> apellido}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
-					Servicio: Mudanza <br>
+					Servicio: {{$servicio -> tipo_servicio}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
-					Vehículo: Camión <br>
-					<div style="border-bottom: 1px solid silver;"></div>
-					Lugar: Talca <br>
+					Lugar: {{$servicio -> region}}, {{$servicio -> comuna}} <br>
 					<div style="border-bottom: 1px solid silver;"></div>
 				</section>
 			</div>
