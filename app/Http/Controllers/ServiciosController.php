@@ -32,7 +32,7 @@ class ServiciosController extends Controller
         //le diremos que gestione el acceso por usuario 
         $this->middleware('auth');
         $this->auth =$auth;
-//comentario
+//comentario de prueba 
 
     }
 
